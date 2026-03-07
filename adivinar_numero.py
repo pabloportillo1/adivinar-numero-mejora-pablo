@@ -1,22 +1,64 @@
 import random
 
-def start_game():
-    random_number = random.randint(1, 20)
-    guessed_number = 0
-    attempts = 0
-    print("Adivina el número entre 1 y 20")
-    
-    while guessed_number != random_number:
-        guessed_number = int(input("Ingresa tu intento: "))
-        attempts += 1
+def welcome_rules(number_of_guesses: int, lowerBound: int, upperBound: int):
+
+    print("BIENVENIDO AL JUEGO DE ADIVINAR EL NUMERO")
+    print(f"--------------------------------\nTendras {number_of_guesses} intentos para adivinar.\n")
+    print(f"El objetivo del juego es adivinar un número entre {lowerBound} y {upperBound}")
+    print("Tienes que ingresar tu intento y el programa te dirá si es muy bajo, muy alto o correcto\n")
+    print("¡Buena suerte!\n--------------------------------")
+
+def generate_randint(lowerBound : int, upperBound : int) -> int:
+    random_number = random.randint(lowerBound, upperBound)
+    return random_number
+
+def guess_input() -> int:
+    guessed_number = int(input("Ingresa tu intento: "))
+    return guessed_number
+
+def guess_validation(guessed_number : int, random_number : int) -> bool:
     if guessed_number < random_number:
-        print("Muy bajo")
+        return 0
     elif guessed_number > random_number:
-        print("Muy alto")
-    elif guessed_number == random_number:
-        print("¡Correcto!")
+        return 0
     else:
-        print("Error")
-        print("Número de intentos:", attempts)
+        return 1
+    
+def attempt_counter( guess_validation : bool, number_of_guesses : int ) -> int:
+    attempts = 0
+    if guess_validation == 0:
+        attempts += 1
+        number_of_guesses -= 1
+    return attempts, number_of_guesses
+
+def play_game():
+
+    number_of_guesses = int(input("Ingresa el numero de intentos que deseas tener: \n"))
+    lowerBound = int(input("Ingresa el limite inferior del rango: \n"))
+    upperBound = int(input("Ingresa el limite superior del rango: \n"))
+    random_number = generate_randint(lowerBound, upperBound)
+
+    welcome_rules(number_of_guesses, lowerBound, upperBound)
+    while number_of_guesses > 0:
+        guessed_number = guess_input()
+
+        if guess_validation(guessed_number, random_number) == 1:
+            print(f"Adivinaste, el numero era {random_number}")
+            break
+        else:
+            print(f"Tu intento es incorrecto, te quedan {number_of_guesses} intentos.")
+            number_of_guesses -= 1
+            if number_of_guesses == 0:
+                print(f"--------------------------------\nPerdiste, el numero era {random_number}")
+
+
+
+
+    
+def main():
+    
+    play_game()
         
-start_game()
+if __name__ == "__main__":
+    main()
+
