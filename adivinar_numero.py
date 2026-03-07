@@ -13,8 +13,14 @@ def generate_randint(lowerBound : int, upperBound : int) -> int:
     return random_number
 
 def guess_input() -> int:
-    guessed_number = int(input("Ingresa tu intento: "))
-    return guessed_number
+
+    while True:
+        try:
+            guessed_number = int(input("Ingresa tu intento: \n"))
+            return guessed_number
+        except ValueError:
+            print("Entrada no valida.Por favor ingresa un numero entero.")
+            return guess_input()
 
 def guess_validation(guessed_number : int, random_number : int) -> bool:
     if guessed_number < random_number:
@@ -51,10 +57,6 @@ def play_game():
             if number_of_guesses == 0:
                 print(f"--------------------------------\nPerdiste, el numero era {random_number}")
 
-
-
-
-    
 def main():
     
     play_game()
