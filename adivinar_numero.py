@@ -55,7 +55,7 @@ def play_game():
     welcome_rules(number_of_guesses, lowerBound, upperBound)
     available_attempts = number_of_guesses
 
-    while available_attempts > 0:
+    while available_attempts >= 0:
 
         guessed_number = guess_input(lowerBound, upperBound)
 
@@ -63,16 +63,10 @@ def play_game():
             print(f"Adivinaste, el numero era {random_number}")
             available_attempts -= 1
             break
+        elif available_attempts == 0:
+            print(f"Te has quedado sin intentos, el numero era {random_number}")
+            break
         else:
             print(f"Tu intento es incorrecto, te quedan {available_attempts} intentos.")
             available_attempts -= 1
-
-    print(f"--------------------------------\nPerdiste, el numero era {random_number}")
-
-def main():
-    
-    play_game()
-        
-if __name__ == "__main__":
-    main()
 
