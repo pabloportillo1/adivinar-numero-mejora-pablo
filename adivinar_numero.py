@@ -34,6 +34,28 @@ def guess_input(lowerBound: int, upperBound: int) -> int:
             print(e)
 
 
+def bounds_input(lowerOrUpper: str) -> int:
+
+    while True:
+        try: 
+            bound = int(input(f"Ingresa el limite {lowerOrUpper} del rango: \n"))
+            return bound
+        except ValueError:
+            print("Entrada incorrecta, el valor debe de ser un entero.")
+
+def attempts_input() -> int:
+    
+    while True:
+        try:
+            number_of_guesses = int(input("Ingresa el numero de intentos que deseas tener: \n"))
+            if number_of_guesses <= 0:
+                print("El numero de intentos debe ser un entero positivo. Por favor ingresa el numero de intentos nuevamente.")
+                continue
+            return number_of_guesses
+        except ValueError:
+            print("Entrada no valida.Por favor ingresa un numero entero positivo.")
+
+
 def guess_validation(guessed_number : int, random_number : int) -> bool:
 
     if guessed_number < random_number:
@@ -47,10 +69,12 @@ def guess_validation(guessed_number : int, random_number : int) -> bool:
 
 def play_game():
 
-    number_of_guesses = int(input("Ingresa el numero de intentos que deseas tener: \n"))
-    lowerBound = int(input("Ingresa el limite inferior del rango: \n"))
-    upperBound = int(input("Ingresa el limite superior del rango: \n"))
+
+    number_of_guesses = attempts_input()
+    lowerBound = bounds_input("inferior")
+    upperBound = bounds_input("superior")
     random_number = generate_randint(lowerBound, upperBound)
+
 
     welcome_rules(number_of_guesses, lowerBound, upperBound)
     available_attempts = number_of_guesses
