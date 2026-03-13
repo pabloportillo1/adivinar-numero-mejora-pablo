@@ -67,6 +67,5 @@ def play_game():
             print(f"Te has quedado sin intentos, el numero era {random_number}")
             break
         else:
-            print(f"Tu intento es incorrecto, te quedan {available_attempts} intentos.")
             available_attempts -= 1
-
+            print(f"Tu intento es incorrecto, te quedan {available_attempts} intentos.")
