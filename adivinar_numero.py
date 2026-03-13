@@ -55,7 +55,7 @@ def play_game():
     welcome_rules(number_of_guesses, lowerBound, upperBound)
     available_attempts = number_of_guesses
 
-    while available_attempts >= 0:
+    while available_attempts > 0:
 
         guessed_number = guess_input(lowerBound, upperBound)
 
